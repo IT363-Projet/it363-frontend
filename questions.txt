@@ -13,11 +13,17 @@ Question à Choix Multiple :
     "multiple": true
 }
 
-Question à Échelle de Likert : 
 {
-    "type": "echelle_likert",
-    "question": "Dans quelle mesure êtes-vous d'accord avec l'affirmation suivante : \"Je suis satisfait de mon emploi actuel.\"",
-    "options": ["Pas du tout d'accord", "Plutôt pas d'accord", "Neutre", "Plutôt d'accord", "Tout à fait d'accord"]
+    "type": "image_question",
+    "question": "Que représente cette image ?",
+    "image_url": "https://example.com/path/to/image.jpg",
+    "options": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+    ],
+    "correct_answer": "Option B"
 }
 
 Question de Classement : 
