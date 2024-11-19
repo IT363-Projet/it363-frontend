@@ -41,3 +41,29 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Dart
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+
+# Flutter build
+build/
+
+# Platform folders
+android/
+ios/
+linux/
+macos/
+web/
+windows/
+
+# IDEs
+.idea/
+.vscode/
+
+# Autres fichiers locaux
+*.iml
+
