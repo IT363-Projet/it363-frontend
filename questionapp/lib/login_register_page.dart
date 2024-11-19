@@ -8,11 +8,11 @@ class LoginRegisterPage extends StatefulWidget {
 }
 
 class LoginRegisterPageState extends State<LoginRegisterPage> {
-  bool isLogin = false;
+  bool isLogin = true;
 
   void toggleForm() {
     setState(() {
-      isLogin = !isLogin;
+      isLogin = !isLogin; // Change l'état pour basculer entre "Sign In" et "Sign Up"
     });
   }
 
@@ -21,102 +21,162 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login / Register'),
+        backgroundColor: const Color(0xFF2C7056),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: isLogin
-                  ? _buildLoginForm()
-                  : _buildRegisterForm(),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF2C7056), // Fond vert
+        ),
+        child: Center(
+          child: Container(
+            width: 800,
+            height: 400,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.125),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 25,
+                  offset: const Offset(0, 5),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            TextButton(
-              onPressed: toggleForm,
-              child: Text(isLogin
-                  ? "Don't have an account? Register"
-                  : "Already have an account? Login"),
+            child: Stack(
+              children: [
+                // Formulaire Sign In
+                AnimatedOpacity(
+                  opacity: isLogin ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 500),
+                  child: _buildLoginForm(),
+                ),
+                // Formulaire Sign Up
+                AnimatedOpacity(
+                  opacity: isLogin ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 500),
+                  child: _buildRegisterForm(),
+                ),
+                // Boutons pour basculer entre les formulaires
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: TextButton(
+                    onPressed: toggleForm,
+                    child: Text(
+                      isLogin
+                          ? "Don't have an account? Register"
+                          : "Already have an account? Login",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildLoginForm() {
-    return Column(
-      key: const ValueKey('LoginForm'),
-      children: [
-        TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Pseudo',
-            border: OutlineInputBorder(),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Sign In",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-        ),
-        const SizedBox(height: 10),
-        TextFormField(
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Password',
-            border: OutlineInputBorder(),
+          const SizedBox(height: 20),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            // TODO: Implement login logic
-          },
-          child: const Text('Login'),
-        ),
-      ],
+          const SizedBox(height: 15),
+          TextFormField(
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2C7056),
+              foregroundColor: const Color(0xFFEBF4F3),
+            ),
+            onPressed: () {
+              // TODO: Implémente la logique de connexion
+            },
+            child: const Text("Login"),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildRegisterForm() {
-    return Column(
-      key: const ValueKey('RegisterForm'),
-      children: [
-        TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Pseudo',
-            border: OutlineInputBorder(),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Sign Up",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-        ),
-        const SizedBox(height: 10),
-        TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Email',
-            border: OutlineInputBorder(),
+          const SizedBox(height: 20),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-        TextFormField(
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Password',
-            border: OutlineInputBorder(),
+          const SizedBox(height: 15),
+          TextFormField(
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-        TextFormField(
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Confirm Password',
-            border: OutlineInputBorder(),
+          const SizedBox(height: 15),
+          TextFormField(
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Confirm Password',
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            // TODO: Implement register logic
-          },
-          child: const Text('Register'),
-        ),
-      ],
+          const SizedBox(height: 20),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2C7056),
+              foregroundColor: const Color(0xFFEBF4F3),
+            ),
+            onPressed: () {
+              // TODO: Implémente la logique d'inscription
+            },
+            child: const Text("Register"),
+          ),
+        ],
+      ),
     );
   }
 }
