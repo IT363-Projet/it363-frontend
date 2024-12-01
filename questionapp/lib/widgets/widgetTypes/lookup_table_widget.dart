@@ -5,7 +5,7 @@ class LookupTableWidget extends StatefulWidget {
   final Question question;
   final Function(List<String>) onSubmit;
 
-  LookupTableWidget({required this.question, required this.onSubmit});
+  const LookupTableWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
 
   @override
   _LookupTableWidgetState createState() => _LookupTableWidgetState();
@@ -22,13 +22,13 @@ class _LookupTableWidgetState extends State<LookupTableWidget> {
       Center( // Centrer la question
         child: Text(
           widget.question.questionText,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       Center( // Centrer le tableau
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 600), // Largeur maximale de 600 pixels
+          constraints: const BoxConstraints(maxWidth: 600), // Largeur maximale de 600 pixels
           child: Table(
             border: TableBorder.all(),
             columnWidths: const {
@@ -44,7 +44,7 @@ class _LookupTableWidgetState extends State<LookupTableWidget> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         col,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     );
                   },
@@ -80,18 +80,18 @@ class _LookupTableWidgetState extends State<LookupTableWidget> {
                     ],
                   );
                 },
-              ).toList(),
+              ),
             ],
           ),
         ),
       ),
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       Center(
       child: ElevatedButton(
         onPressed: selectedAnswers.isNotEmpty
             ? () => widget.onSubmit(selectedAnswers)
             : null,
-        child: Text("Submit"),
+        child: const Text("Submit"),
       ),
     ),
     ],

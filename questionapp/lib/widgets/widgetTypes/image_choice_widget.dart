@@ -5,7 +5,7 @@ class ImageChoiceWidget extends StatefulWidget {
   final Question question;
   final Function(String) onSubmit;
 
-  ImageChoiceWidget({required this.question, required this.onSubmit});
+  const ImageChoiceWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
 
   @override
   _ImageChoiceWidgetState createState() => _ImageChoiceWidgetState();
@@ -21,14 +21,14 @@ class _ImageChoiceWidgetState extends State<ImageChoiceWidget> {
       children: [
         Text(
           widget.question.questionText,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 600), // Largeur maximale
+          constraints: const BoxConstraints(maxWidth: 600), // Largeur maximale
           child: GridView.builder(
             shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemCount: widget.question.imageOptions!.length,
@@ -63,12 +63,12 @@ class _ImageChoiceWidgetState extends State<ImageChoiceWidget> {
             },
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ElevatedButton(
           onPressed: selectedImage != null
               ? () => widget.onSubmit(selectedImage!)
               : null,
-          child: Text("Submit"),
+          child: const Text("Submit"),
         ),
       ],
     );

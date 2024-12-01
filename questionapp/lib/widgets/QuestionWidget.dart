@@ -13,7 +13,7 @@ class QuestionWidget extends StatelessWidget {
   final Question question;
   final Function(dynamic) onSubmit; // Callback pour soumettre une réponse
 
-  QuestionWidget({required this.question, required this.onSubmit});
+  const QuestionWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class QuestionWidget extends StatelessWidget {
           onSubmit: (selectedOption) => onSubmit(selectedOption),
         );
       default:
-        return Center(
+        return const Center(
           child: Text("Unknown question type"),
         );
     }
