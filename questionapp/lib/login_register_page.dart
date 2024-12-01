@@ -8,11 +8,11 @@ class LoginRegisterPage extends StatefulWidget {
 }
 
 class LoginRegisterPageState extends State<LoginRegisterPage> {
-  bool isLogin = true;
+  bool isLogin = false;
 
   void toggleForm() {
     setState(() {
-      isLogin = !isLogin; // Change l'état pour basculer entre "Sign In" et "Sign Up"
+      isLogin = !isLogin;
     });
   }
 
@@ -21,11 +21,11 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login / Register'),
-        backgroundColor: const Color(0xFF2C7056),
+        backgroundColor: const Color(0xFF9AC8EB),
       ),
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF2C7056), // Fond vert
+          color: Color(0xFF9AC8EB),
         ),
         child: Center(
           child: Container(
@@ -112,7 +112,7 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2C7056),
+              backgroundColor: const Color(0xFF9AC8EB),
               foregroundColor: const Color(0xFFEBF4F3),
             ),
             onPressed: () {
@@ -167,7 +167,7 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2C7056),
+              backgroundColor: const Color(0xFF9AC8EB),
               foregroundColor: const Color(0xFFEBF4F3),
             ),
             onPressed: () {
