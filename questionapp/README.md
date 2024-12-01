@@ -14,3 +14,24 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Project Architecture
+
+lib/
+├── data/
+│   ├── theme1/
+│   │   └── questions.dart
+│   ├── theme2/
+│   │   └── questions.dart
+│   ├── theme3/
+│   │   └── questions.dart
+│   ├── theme4/
+│       └── questions.dart
+├── models/
+│   └── question.dart
+├── screens/
+│   ├── home_screen.dart
+│   ├── question_screen.dart
+├── widgets/
+│   └── question_widget.dart
+└── main.dart 
