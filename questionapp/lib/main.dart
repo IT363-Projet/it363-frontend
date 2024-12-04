@@ -127,9 +127,16 @@
 
 import 'package:flutter/material.dart';
 import 'screens/HomeScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Assure que les bindings Flutter sont initialisés avant d'exécuter du code asynchrone
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Initialise Firebase
+
+  runApp(MyApp()); // Lance l'application
 }
 
 class MyApp extends StatelessWidget {
@@ -145,4 +152,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
