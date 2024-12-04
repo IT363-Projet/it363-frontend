@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'screens/HomeScreen.dart';
-import 'screens/login_register.dart';
-import 'screens/question_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Questionnaire App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue, // Couleur principale de l'application
       ),
-      home: const LoginRegisterPage(),
-      debugShowCheckedModeBanner: false,
+      home: HomeScreen(), // Page d'accueil
+      debugShowCheckedModeBanner: false, // Supprime le bandeau "Debug"
     );
   }
 }

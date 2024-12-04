@@ -5,7 +5,7 @@ class DropdownQuestionWidget extends StatefulWidget {
   final Question question;
   final Function(String) onSubmit;
 
-  const DropdownQuestionWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
+  DropdownQuestionWidget({required this.question, required this.onSubmit});
 
   @override
   _DropdownQuestionWidgetState createState() => _DropdownQuestionWidgetState();
@@ -21,12 +21,12 @@ class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
       children: [
         Text(
           widget.question.questionText,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         DropdownButton<String>(
           value: selectedOption,
-          hint: const Text("Select an option"), // Placeholder initial
+          hint: Text("Select an option"), // Placeholder initial
           items: widget.question.dropdownOptions!.map((option) {
             return DropdownMenuItem<String>(
               value: option,
@@ -39,10 +39,10 @@ class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
             });
           },
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         ElevatedButton(
           onPressed: selectedOption != null ? () => widget.onSubmit(selectedOption!) : null,
-          child: const Text("Submit"),
+          child: Text("Submit"),
         ),
       ],
     );

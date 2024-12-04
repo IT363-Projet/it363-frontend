@@ -7,7 +7,7 @@ class RankingQuestionWidget extends StatefulWidget {
   final Question question;
   final Function(Map<String, int>) onSubmit;
 
-  const RankingQuestionWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
+  RankingQuestionWidget({required this.question, required this.onSubmit});
 
   @override
   _RankingQuestionWidgetState createState() => _RankingQuestionWidgetState();
@@ -20,7 +20,7 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
   void initState() {
     super.initState();
     // Initialiser tous les éléments avec des valeurs par défaut
-    rankings = { for (var k in widget.question.rankingOptions!.keys) k : 1 };
+    rankings = Map.fromIterable(widget.question.rankingOptions!.keys,key: (k) => k,value: (v) => 1,);
   }
 
   void _updateRankings(String option, int newValue) {
@@ -47,10 +47,10 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
         children: [
           Text(
             widget.question.questionText,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           ...widget.question.rankingOptions!.keys.map((option) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -58,8 +58,8 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(option, style: const TextStyle(fontSize: 16)),
-                  const SizedBox(width: 20),
+                  Text(option, style: TextStyle(fontSize: 16)),
+                  SizedBox(width: 20),
                   DropdownButton<int>(
                     value: rankings[option],
                     items: List.generate(
@@ -78,11 +78,11 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
                 ],
               ),
             );
-          }),
-          const SizedBox(height: 20),
+          }).toList(),
+          SizedBox(height: 20),
           ElevatedButton(
             onPressed: () => widget.onSubmit(rankings),
-            child: const Text("Submit"),
+            child: Text("Submit"),
           ),
         ],
       ),

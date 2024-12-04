@@ -7,7 +7,7 @@ class SliderQuestionWidget extends StatefulWidget {
   final Question question;
   final Function(int) onSubmit;
 
-  const SliderQuestionWidget({Key? key, required this.question, required this.onSubmit}) : super(key: key);
+  SliderQuestionWidget({required this.question, required this.onSubmit});
 
   @override
   _SliderQuestionWidgetState createState() => _SliderQuestionWidgetState();
@@ -24,13 +24,13 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
                 Center(
                 child : Text(
                       widget.question.questionText,
-                      style: const TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Center( // Centrer le slider
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 300), // Largeur maximale du slider
+                    constraints: BoxConstraints(maxWidth: 300), // Largeur maximale du slider
                     child: Slider(
                         value: sliderValue,
                         min: widget.question.minValue!.toDouble(),
@@ -45,11 +45,11 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
                     onPressed: () => widget.onSubmit(sliderValue.round()),
-                    child: const Text("Submit"),
+                    child: Text("Submit"),
                   ),
                 ),
             ],

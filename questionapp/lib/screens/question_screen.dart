@@ -10,7 +10,7 @@ import '../widgets/QuestionWidget.dart';
 class QuestionScreen extends StatefulWidget {
   final String theme;
 
-  const QuestionScreen({Key? key, required this.theme}) : super(key: key);
+  QuestionScreen({required this.theme});
 
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
@@ -81,8 +81,8 @@ class _QuestionScreenState extends State<QuestionScreen>
           {
               return AlertDialog
               (
-                  title: const Text("Merci !"),
-                  actions: [TextButton(onPressed: () {Navigator.of(context).pop(); Navigator.of(context).pop(); }, child: const Text("OK"),),],
+                  title: Text("Merci !"),
+                  actions: [TextButton(onPressed: () {Navigator.of(context).pop(); Navigator.of(context).pop(); }, child: Text("OK"),),],
               );
           },
       );
@@ -95,8 +95,8 @@ class _QuestionScreenState extends State<QuestionScreen>
       {
           return Scaffold
           (
-              appBar: AppBar(title: Text('Thème : ${widget.theme}', style: const TextStyle(fontSize: 18, fontFamily: 'DotGothic16')),),
-              body: const Center(child: Text('No questions available for this theme.', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),),
+              appBar: AppBar(title: Text('Thème : ${widget.theme}', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16')),),
+              body: Center(child: Text('No questions available for this theme.', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),),
           );
       }
 
@@ -104,7 +104,7 @@ class _QuestionScreenState extends State<QuestionScreen>
       (
           appBar: AppBar
           (
-              title: Text('Thème : ${widget.theme}', style: const TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),
+              title: Text('Thème : ${widget.theme}', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),
               centerTitle: true
           ),
           body: Center(child: QuestionWidget(question: questions[currentQuestionIndex], onSubmit: _submitAnswer),),
