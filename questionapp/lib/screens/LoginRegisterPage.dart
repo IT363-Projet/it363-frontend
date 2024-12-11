@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'HomeScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginRegisterPage extends StatefulWidget {
   const LoginRegisterPage();
@@ -9,11 +11,54 @@ class LoginRegisterPage extends StatefulWidget {
 
 class LoginRegisterPageState extends State<LoginRegisterPage> {
   bool isLogin = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void toggleForm() {
     setState(() {
       isLogin = !isLogin;
     });
+  }
+
+  Future<void> _login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Logged in successfully!')),
+      );
+      // Redirection vers HomeScreen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.message}')),
+      );
+    }
+  }
+
+  Future<void> _register(String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account created successfully!')),
+      );
+      // Redirection vers HomeScreen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.message}')),
+      );
+    }
   }
 
   @override
@@ -80,6 +125,9 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
     );
   }
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   Widget _buildLoginForm() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -88,10 +136,12 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
         children: [
           const Text(
             "Sign In",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           TextFormField(
+            controller: emailController,
             decoration: const InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
@@ -101,6 +151,7 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
           ),
           const SizedBox(height: 15),
           TextFormField(
+            controller: passwordController,
             obscureText: true,
             decoration: const InputDecoration(
               labelText: 'Password',
@@ -116,7 +167,7 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
               foregroundColor: const Color(0xFFEBF4F3),
             ),
             onPressed: () {
-              // TODO: Implémente la logique de connexion
+              _login(emailController.text, passwordController.text);
             },
             child: const Text("Login"),
           ),
@@ -126,6 +177,10 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
   }
 
   Widget _buildRegisterForm() {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -133,10 +188,13 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
         children: [
           const Text(
             "Sign Up",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
+          // Champ Email
           TextFormField(
+            controller: emailController,
             decoration: const InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
@@ -145,7 +203,9 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
             ),
           ),
           const SizedBox(height: 15),
+          // Champ Mot de Passe
           TextFormField(
+            controller: passwordController,
             obscureText: true,
             decoration: const InputDecoration(
               labelText: 'Password',
@@ -155,7 +215,9 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
             ),
           ),
           const SizedBox(height: 15),
+          // Champ Confirmation du Mot de Passe
           TextFormField(
+            controller: confirmPasswordController,
             obscureText: true,
             decoration: const InputDecoration(
               labelText: 'Confirm Password',
@@ -171,7 +233,16 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
               foregroundColor: const Color(0xFFEBF4F3),
             ),
             onPressed: () {
-              // TODO: Implémente la logique d'inscription
+              // Vérification si les mots de passe correspondent
+              if (passwordController.text != confirmPasswordController.text) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Passwords do not match!')),
+                );
+                return;
+              }
+
+              // Appel à la fonction _register
+              _register(emailController.text, passwordController.text);
             },
             child: const Text("Register"),
           ),
