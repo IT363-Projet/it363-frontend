@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:questionapp/screens/HomeScreen.dart';
 import 'screens/HomeScreen.dart';
-import 'screens/LoginRegisterPage.dart';
+// import 'screens/LoginRegisterPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue, // Couleur principale de l'application
       ),
-      home: LoginRegisterPage(), // Page d'accueil
+      home: HomeScreen(), // Page d'accueil
       debugShowCheckedModeBanner: false, // Supprime le bandeau "Debug"
     );
   }

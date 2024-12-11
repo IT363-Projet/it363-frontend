@@ -6,6 +6,7 @@ import '../data/JOtheme/questions.dart';
 import '../data/ILtheme/questions.dart';
 import '../data/MAtheme/questions.dart';
 import '../widgets/QuestionWidget.dart';
+import '../widgets/ScoreBoardWidget.dart';
 
 class QuestionScreen extends StatefulWidget {
   final String theme;
@@ -16,15 +17,14 @@ class QuestionScreen extends StatefulWidget {
   _QuestionScreenState createState() => _QuestionScreenState();
 }
 
-class _QuestionScreenState extends State<QuestionScreen> 
-{
-
-  late List questions; // Liste des questions en fonction du thème
-  int currentQuestionIndex = 0; // Index de la question actuelle
+class _QuestionScreenState extends State<QuestionScreen> {
+  late List questions;
+  int currentQuestionIndex = 0;
+  int correctAnswers = 0;
+  int incorrectAnswers = 0;
 
   @override
-  void initState() 
-  {
+  void initState() {
     super.initState();
 
     // Sélectionne les questions en fonction du thème
@@ -46,68 +46,111 @@ class _QuestionScreenState extends State<QuestionScreen>
     }
   }
 
-  void _submitAnswer(dynamic selectedOption) 
-  { 
-      final currentQuestion = questions[currentQuestionIndex];
+  void _submitAnswer(dynamic selectedOption) {
+    final currentQuestion = questions[currentQuestionIndex];
 
-      // Choix multiples
-      if (currentQuestion.questionType == 'multiple_choice') 
-      {
-          if (selectedOption == currentQuestion.correctAnswer) {print("Correct answer!");} 
-          else {print("Incorrect. Correct answer: ${currentQuestion.correctAnswer}");}
-      } 
-      
-      // Slider
-      else if (currentQuestion.questionType == 'slider') {print("Slider value selected: $selectedOption");} 
+    // Choix multiples
+    if (currentQuestion.questionType == 'multiple_choice') {
+      if (selectedOption == currentQuestion.correctAnswer) {
+        print("Correct answer!");
+      } else {
+        print("Incorrect. Correct answer: ${currentQuestion.correctAnswer}");
+      }
+    }
 
-      // Ranking
-      else if (currentQuestion.questionType == 'ranking') {print("Ranking submitted: $selectedOption");}
+    // Slider
+    else if (currentQuestion.questionType == 'slider') {
+      print("Slider value selected: $selectedOption");
+    }
 
-      // Réponse correct ou non
-      if (selectedOption == questions[currentQuestionIndex].correctAnswer) {print("Correct!");} 
-      else {print("Incorrect. Correct answer: ${questions[currentQuestionIndex].correctAnswer}");}
+    // Ranking
+    else if (currentQuestion.questionType == 'ranking') {
+      print("Ranking submitted: $selectedOption");
+    }
 
-      // Question suivante
-      if (currentQuestionIndex < questions.length - 1) {setState(() {currentQuestionIndex++;});} 
-      else { _showCompletionDialog();}
+    // Réponse correct ou non
+    if (selectedOption == currentQuestion.correctAnswer) {
+      correctAnswers++;
+    } else {
+      incorrectAnswers++;
+    }
+
+    // Question suivante
+    if (currentQuestionIndex < questions.length - 1) {
+      setState(() {
+        currentQuestionIndex++;
+      });
+    } else {
+      _showCompletionDialog();
+    }
   }
 
-  void _showCompletionDialog() 
-  {
-      showDialog
-      (
-          context: context,
-          builder: (context) 
-          {
-              return AlertDialog
-              (
-                  title: Text("Merci !"),
-                  actions: [TextButton(onPressed: () {Navigator.of(context).pop(); Navigator.of(context).pop(); }, child: Text("OK"),),],
-              );
-          },
-      );
+  void _showCompletionDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Merci !"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-      if (questions.isEmpty) 
-      {
-          return Scaffold
-          (
-              appBar: AppBar(title: Text('Thème : ${widget.theme}', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16')),),
-              body: Center(child: Text('No questions available for this theme.', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),),
-          );
-      }
-
-      return Scaffold
-      (
-          appBar: AppBar
-          (
-              title: Text('Thème : ${widget.theme}', style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),),
-              centerTitle: true
+  Widget build(BuildContext context) {
+    if (questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Thème : ${widget.theme}',
+            style: const TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),
           ),
-          body: Center(child: QuestionWidget(question: questions[currentQuestionIndex], onSubmit: _submitAnswer),),
+        ),
+        body: const Center(
+          child: Text(
+            'No questions available for this theme.',
+            style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),
+          ),
+        ),
       );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Thème : ${widget.theme}',
+          style: const TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Scoreboard Widget
+            ScoreBoardWidget(
+              correctAnswers: correctAnswers,
+              incorrectAnswers: incorrectAnswers,
+            ),
+            const SizedBox(height: 20),
+            // Question Widget
+            Center(
+              child: QuestionWidget(
+                question: questions[currentQuestionIndex],
+                onSubmit: _submitAnswer,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
