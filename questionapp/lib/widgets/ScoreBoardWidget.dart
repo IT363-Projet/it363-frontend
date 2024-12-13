@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ScoreBoardWidget extends StatelessWidget {
-  final int correctAnswers;
-  final int incorrectAnswers;
+  final Map<String, int> scores; // Map pour tous les scores
 
   const ScoreBoardWidget({
     Key? key,
-    required this.correctAnswers,
-    required this.incorrectAnswers,
+    required this.scores,
   }) : super(key: key);
 
   @override
@@ -36,19 +34,25 @@ class ScoreBoardWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildScoreTile('Correct', correctAnswers, Colors.green),
-              _buildScoreTile('Incorrect', incorrectAnswers, Colors.red),
-            ],
-          ),
+          // Génération des tuiles dynamiquement
+          ...scores.entries.map((entry) => _buildScoreTile(entry.key, entry.value)),
         ],
       ),
     );
   }
 
-  Widget _buildScoreTile(String label, int count, Color color) {
+  Widget _buildScoreTile(String label, int count) {
+    final color = label.toLowerCase() == 'correct'
+        ? Colors.green
+        : label.toLowerCase() == 'incorrect'
+            ? Colors.red
+            : Colors.blue; // Couleur par défaut pour les autres types
+
+    // Si le type est "Time", formater en minutes et secondes
+    String displayValue = label.toLowerCase() == 'time'
+        ? _formatTime(count)
+        : count.toString();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -62,7 +66,7 @@ class ScoreBoardWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          count.toString(),
+          displayValue,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -71,5 +75,12 @@ class ScoreBoardWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  // Méthode pour formater le temps en minutes:secondes
+  String _formatTime(int seconds) {
+    final minutes = seconds ~/ 60;
+    final remainingSeconds = seconds % 60;
+    return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

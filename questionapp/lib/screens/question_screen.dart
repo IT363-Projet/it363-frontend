@@ -1,5 +1,4 @@
-// chemin lib/screens/question_screen.dart
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../data/LHtheme/questions.dart';
 import '../data/JOtheme/questions.dart';
@@ -22,6 +21,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
   int incorrectAnswers = 0;
+  int totalTime = 0; // Temps total passé (en secondes)
+  Timer? _timer; // Chronomètre pour la question actuelle
+  int _currentQuestionTime = 0; // Temps passé sur la question actuelle
 
   @override
   void initState() {
@@ -44,42 +46,40 @@ class _QuestionScreenState extends State<QuestionScreen> {
       default:
         questions = [];
     }
+
+    _startTimer(); // Démarre le chronomètre pour la première question
+  }
+
+  void _startTimer() {
+    _currentQuestionTime = 0; // Réinitialise le temps de la question
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentQuestionTime++;
+        totalTime++;
+      });
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel(); // Arrête le chronomètre
   }
 
   void _submitAnswer(dynamic selectedOption) {
     final currentQuestion = questions[currentQuestionIndex];
 
-    // Choix multiples
-    if (currentQuestion.questionType == 'multiple_choice') {
-      if (selectedOption == currentQuestion.correctAnswer) {
-        print("Correct answer!");
-      } else {
-        print("Incorrect. Correct answer: ${currentQuestion.correctAnswer}");
-      }
-    }
+    _stopTimer(); // Arrête le chronomètre pour la question actuelle
 
-    // Slider
-    else if (currentQuestion.questionType == 'slider') {
-      print("Slider value selected: $selectedOption");
-    }
-
-    // Ranking
-    else if (currentQuestion.questionType == 'ranking') {
-      print("Ranking submitted: $selectedOption");
-    }
-
-    // Réponse correct ou non
     if (selectedOption == currentQuestion.correctAnswer) {
       correctAnswers++;
     } else {
       incorrectAnswers++;
     }
 
-    // Question suivante
     if (currentQuestionIndex < questions.length - 1) {
       setState(() {
         currentQuestionIndex++;
       });
+      _startTimer(); // Redémarre le chronomètre pour la question suivante
     } else {
       _showCompletionDialog();
     }
@@ -137,8 +137,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             // Scoreboard Widget
             ScoreBoardWidget(
-              correctAnswers: correctAnswers,
-              incorrectAnswers: incorrectAnswers,
+              scores: {
+                'Correct': correctAnswers,
+                'Incorrect': incorrectAnswers,
+                'Time': totalTime, // Temps total en secondes
+              },
             ),
             const SizedBox(height: 20),
             // Question Widget
@@ -154,3 +157,4 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 }
+

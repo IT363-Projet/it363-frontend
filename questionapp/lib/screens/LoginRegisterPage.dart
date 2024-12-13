@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../models/AppTheme.dart'; // Importez la classe AppTheme
 
 class LoginRegisterPage extends StatefulWidget {
-  const LoginRegisterPage();
+  final VoidCallback toggleTheme;
+
+  const LoginRegisterPage({required this.toggleTheme});
 
   @override
   LoginRegisterPageState createState() => LoginRegisterPageState();
@@ -28,10 +31,12 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Logged in successfully!')),
       );
-      // Redirection vers HomeScreen
+      // Redirection vers HomeScreen avec le thème dynamique
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(toggleTheme: widget.toggleTheme),
+        ),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -49,10 +54,12 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Account created successfully!')),
       );
-      // Redirection vers HomeScreen
+      // Redirection vers HomeScreen avec le thème dynamique
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(toggleTheme: widget.toggleTheme),
+        ),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -66,7 +73,13 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login / Register'),
-        backgroundColor: const Color(0xFF9AC8EB),
+        backgroundColor: AppTheme('light').themeData.primaryColor, // Utilisation du thème
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.brightness_6),
+            onPressed: widget.toggleTheme, // Basculer entre clair et sombre
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
