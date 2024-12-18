@@ -20,7 +20,7 @@ final List<Question> geographyThemeQuestions =
     questionText: 'Cliquez sur le Mont Everest',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/k2.jpg',
+      'lib/assets/K2.jpg',
       'lib/assets/everest.jpg',
       'lib/assets/aconcagua.jpg',
       'lib/assets/mont_blanc.jpg',
