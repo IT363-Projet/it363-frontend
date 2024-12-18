@@ -8,10 +8,10 @@ final List<Question> geographyThemeQuestions =
     questionType: 'ranking',
     rankingOptions: {
       'Asie': 0,
-      'Afrique': 0,
       'Amérique du Nord': 0,
-      'Europe': 0,
+      'Afrique': 0,
       'Océanie': 0,
+      'Europe': 0,
     },
     correctAnswer: ['Asie', 'Afrique', 'Amérique du Nord', 'Europe', 'Océanie'],
   ),
