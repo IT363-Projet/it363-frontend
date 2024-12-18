@@ -25,15 +25,15 @@ class QuestionViewModel {
       case 'Thème 1':
         questions = LHthemeQuestions;
         break;
-      case 'JOtheme':
-        questions = JOthemeQuestions;
-        break;
-      case 'ILtheme':
-        questions = IlthemeQuestions;
-        break;
-      case 'MAtheme':
-        questions = MAthemeQuestions;
-        break;
+      // case 'JOtheme':
+      //   questions = JOthemeQuestions;
+      //   break;
+      // case 'ILtheme':
+      //   questions = IlthemeQuestions;
+      //   break;
+      // case 'MAtheme':
+      //   questions = MAthemeQuestions;
+      //   break;
       default:
         questions = [];
     }
