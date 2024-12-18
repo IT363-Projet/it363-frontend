@@ -1,6 +1,6 @@
 // chemin lib/widgets/widgetTypes/multiple_choice_widget.dart
 import 'package:flutter/material.dart';
-import '../../models/question.dart';
+import '../../../Model/models/question.dart';
 
 class MultipleChoiceWidget extends StatefulWidget {
   final Question question;

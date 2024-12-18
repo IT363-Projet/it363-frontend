@@ -1,37 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:questionapp/models/AppTheme.dart';
-import 'package:questionapp/screens/HomeScreen.dart';
+import 'package:questionapp/Model/models/AppTheme.dart';
+import 'package:questionapp/View/screens/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'ViewModel/FirebaseOptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'screens/LoginRegisterPage.dart';
-
-// Factory pour gérer les thèmes
-class ThemeFactory {
-  static ThemeData createTheme(String mode) {
-    if (mode == 'dark') {
-      return ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blueGrey,
-        scaffoldBackgroundColor: Colors.black,
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white70),
-        ),
-      );
-    } else {
-      return ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.black),
-          bodyMedium: TextStyle(color: Colors.black54),
-        ),
-      );
-    }
-  }
-}
+import 'View/screens/LoginRegisterPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +13,34 @@ void main() async {
   );
 
   runApp(MyApp());
+}
+
+class AuthCheck extends StatelessWidget {
+  final VoidCallback toggleTheme;
+
+  const AuthCheck({required this.toggleTheme});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final user = snapshot.data;
+          if (user != null) {
+            return HomeScreen(toggleTheme: toggleTheme);
+          }
+          return LoginRegisterPage(toggleTheme: toggleTheme);
+        }
+        // écran de chargement
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -68,34 +69,29 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class AuthCheck extends StatelessWidget {
-  final VoidCallback toggleTheme;
-
-  const AuthCheck({required this.toggleTheme});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
-          final user = snapshot.data;
-          if (user != null) {
-            return HomeScreen(toggleTheme: toggleTheme);
-          }
-          return LoginRegisterPage(toggleTheme: toggleTheme);
-        }
-
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
-    );
+// Factory pour gérer les thèmes
+class ThemeFactory {
+  static ThemeData createTheme(String mode) {
+    if (mode == 'dark') {
+      return ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blueGrey,
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white70),
+        ),
+      );
+    } else {
+      return ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.black),
+          bodyMedium: TextStyle(color: Colors.black54),
+        ),
+      );
+    }
   }
 }
-
-
-
-

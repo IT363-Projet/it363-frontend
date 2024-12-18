@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/question.dart';
+import '../../../Model/models/question.dart';
 
 class ImageChoiceWidget extends StatefulWidget {
   final Question question;

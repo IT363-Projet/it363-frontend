@@ -1,18 +1,16 @@
-// lib/screens/HomeScreen.dart
-
 import 'package:flutter/material.dart';
-import 'question_screen.dart';
+import 'QuestionScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback toggleTheme; // Fonction pour basculer le thème
   final Map<String, String> themes = {
-    'Louis-Hadrien Theme': 'LHtheme',
-    'Jolann Theme': 'JOtheme',
-    'Il Theme': 'ILtheme',
-    'Mathieu Theme': 'MAtheme',
+    'Theme 1': 'Thème 1',
+    'Theme 2': 'JOtheme',
+    'Theme 3': 'ILtheme',
+    'Theme 4': 'MAtheme',
   };
 
-  HomeScreen({required this.toggleTheme}); // Ajout de toggleTheme en paramètre
+  HomeScreen({required this.toggleTheme}); 
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontFamily: 'DotGothic16'),
         ),
         centerTitle: true,
-        backgroundColor: theme.primaryColor, // Applique la couleur du thème actuel
+        backgroundColor: theme.primaryColor,
         actions: [
           IconButton(
             icon: const Icon(Icons.brightness_6),

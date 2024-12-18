@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/AppTheme.dart'; // Importez la classe AppTheme
+import '../../Model/models/AppTheme.dart'; 
 
 class LoginRegisterPage extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -136,10 +136,7 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
         ),
       ),
     );
-  }
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  }TextEditingController emailController = TextEditingController();TextEditingController passwordController = TextEditingController();
 
   Widget _buildLoginForm() {
     return Container(

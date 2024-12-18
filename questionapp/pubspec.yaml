@@ -63,10 +63,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets: 
-      - lib/assets/jupiter.jpg
-      - lib/assets/mercure.jpg
-      - lib/assets/neptune.jpg
-      - lib/assets/uranus.jpg
+      - lib/Model/assets/jupiter.jpg
+      - lib/Model/assets/mercure.jpg
+      - lib/Model/assets/neptune.jpg
+      - lib/Model/assets/uranus.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -83,7 +83,7 @@ flutter:
   fonts:
     - family: DotGothic16
       fonts:
-        - asset: lib/assets/DotGothic16-Regular.ttf
+        - asset: lib/Model/assets/DotGothic16-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

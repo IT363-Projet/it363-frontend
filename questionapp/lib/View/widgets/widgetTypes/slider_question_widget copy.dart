@@ -1,7 +1,7 @@
 // chemin lib/widgets/widgetTypes/slider_question_widget.dart
 
 import 'package:flutter/material.dart';
-import '../../models/question.dart';
+import '../../../Model/models/question.dart';
 
 class SliderQuestionWidget extends StatefulWidget {
   final Question question;
