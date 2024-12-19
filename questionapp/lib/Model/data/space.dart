@@ -1,6 +1,6 @@
-import '../../models/question.dart';
+import '../models/question.dart';
 
-final List<Question> LHthemeQuestions = 
+final List<Question> spaceThemeQuestions = 
 [
   Question(
     id: 'q1',

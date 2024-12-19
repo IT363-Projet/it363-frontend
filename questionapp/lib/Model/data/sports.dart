@@ -1,0 +1,126 @@
+import '../models/question.dart';
+
+final List<Question> sportsThemeQuestions = [
+  Question(
+    id: 'q1',
+    questionText: 'Qui a remporté la Coupe du Monde de football en 2018 ?',
+    questionType: 'multiple_choice',
+    options: [
+      'Brésil',
+      'Allemagne',
+      'France',
+      'Croatie',
+    ],
+    correctAnswer: 'France',
+  ),
+  Question(
+    id: 'q2',
+    questionText: 'Cliquez sur le ballon utilisé dans la finale de la Coupe du Monde 2018 :',
+    questionType: 'image_choice',
+    imageOptions: [
+      'lib/assets/ballon_2010.jpg',
+      'lib/assets/ballon_2014.jpg',
+      'lib/assets/ballon_2018.jpg',
+      'lib/assets/ballon_2022.jpg',
+    ],
+    correctAnswer: 'lib/assets/ballon_2018.jpg',
+  ),
+  Question(
+    id: 'q3',
+    questionText: "Combien de médailles d'or Michael Phelps a-t-il remportées aux Jeux Olympiques de Pékin en 2008 ?",
+    questionType: 'slider',
+    minValue: 5,
+    maxValue: 10,
+    correctAnswer: '8',
+  ),
+  Question(
+    id: 'q4',
+    questionText: 'Classez ces événements sportifs par leur popularité mondiale (du plus populaire au moins populaire) :',
+    questionType: 'ranking',
+    rankingOptions: {
+      'Coupe du Monde de football': 0,
+      'Jeux Olympiques': 0,
+      'Super Bowl': 0,
+      'Tour de France': 0,
+    },
+    correctAnswer: [
+      'Coupe du Monde de football: 2',
+      'Jeux Olympiques: 1',
+      'Super Bowl: 4',
+      'Tour de France: 3',
+    ],
+  ),
+  Question(
+    id: 'q5',
+    questionText: 'Cochez les sports qui sont des disciplines olympiques :',
+    questionType: 'lookup_table',
+    columns: ["Sport", "Discipline Olympique"],
+    tableData: [
+      {"Option": "Basketball", "Criteria": "Oui"},
+      {"Option": "Cricket", "Criteria": "Non"},
+      {"Option": "Natation", "Criteria": "Oui"},
+      {"Option": "Rugby", "Criteria": "Oui"},
+    ],
+  ),
+  Question(
+    id: 'q6',
+    questionText: 'Quel joueur a marqué le plus de buts en Coupe du Monde de football ?',
+    questionType: 'dropdown',
+    dropdownOptions: [
+      'Pelé',
+      'Miroslav Klose',
+      'Ronaldo',
+      'Lionel Messi',
+    ],
+    correctAnswer: 'Miroslav Klose',
+  ),
+  Question(
+    id: 'q7',
+    questionText: 'Quelle équipe a remporté le plus de titres NBA ?',
+    questionType: 'multiple_choice',
+    options: [
+      'Los Angeles Lakers',
+      'Chicago Bulls',
+      'Golden State Warriors',
+      'Boston Celtics',
+    ],
+    correctAnswer: 'Boston Celtics',
+  ),
+  Question(
+    id: 'q8',
+    questionText: "Qui est le meilleur joueur de football de l'Histoire ?",
+    questionType: 'multiple_choice',
+    imageOptions: [
+      'Maradona',
+      'Pelé',
+      'Cristiano Ronaldo',
+      'Lionel Messi',
+    ],
+    correctAnswer: 'Lionel Messi',
+  ),
+  Question(
+    id: 'q9',
+    questionText: 'Classez ces athlètes par leur nombre total de médailles olympiques (du plus au moins) :',
+    questionType: 'ranking',
+    rankingOptions: {
+      'Michael Phelps': 0,
+      'Larisa Latynina': 0,
+      'Usain Bolt': 0,
+      'Carl Lewis': 0,
+    },
+    correctAnswer: [
+      'Michael Phelps: 1',
+      'Larisa Latynina: 2',
+      'Carl Lewis: 3',
+      'Usain Bolt: 4',
+    ],
+  ),
+  Question(
+    id: 'q10',
+    questionText: 'En quelle année a eu lieu la première édition des Jeux Olympiques modernes ?',
+    questionType: 'slider',
+    minValue: 1850,
+    maxValue: 1900,
+    correctAnswer: '1896',
+  ),
+];

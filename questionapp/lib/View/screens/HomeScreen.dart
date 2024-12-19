@@ -6,10 +6,11 @@ import 'LoginRegisterPage.dart';
 class HomeScreen extends StatelessWidget {
   final VoidCallback toggleTheme; // Fonction pour basculer le thème
   final Map<String, String> themes = {
-    'Theme 1': 'Thème 1',
-    'Theme 2': 'JOtheme',
-    'Theme 3': 'ILtheme',
-    'Theme 4': 'MAtheme',
+    'Space': 'Space',
+    'Geography': 'Geography',
+    'Sci-Fi Movies': 'SciFiMovies',
+    'Mythology': 'Mythology',
+    'Sports': 'Sports',
   };
 
   HomeScreen({required this.toggleTheme});

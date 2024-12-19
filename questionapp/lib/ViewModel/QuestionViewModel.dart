@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart'; // Import nécessaire pour ValueNotifier
-import '../Model/data/LHtheme/questions.dart';
-import '../Model/data/JOtheme/questions.dart';
-import '../Model/data/ILtheme/questions.dart';
-import '../Model/data/MAtheme/questions.dart';
+import '../Model/data/all_questions.dart';
 import '../Model/models/question.dart';
 
 class QuestionViewModel {
@@ -23,18 +20,21 @@ class QuestionViewModel {
 
   void _loadQuestions(String theme) {
     switch (theme) {
-      case 'Thème 1':
-        questions = LHthemeQuestions;
+      case 'Space':
+        questions = spaceThemeQuestions;
         break;
-      // case 'JOtheme':
-      //   questions = JOthemeQuestions;
-      //   break;
-      // case 'ILtheme':
-      //   questions = IlthemeQuestions;
-      //   break;
-      // case 'MAtheme':
-      //   questions = MAthemeQuestions;
-      //   break;
+      case 'Geography':
+        questions = geographyThemeQuestions;
+        break;
+      case 'SciFiMovies':
+        questions = sciFiThemeQuestions;
+        break;
+      case 'Mythology':
+        questions = mythologyThemeQuestions;
+        break;
+      case 'Sports':
+        questions = sportsThemeQuestions;
+        break;
       default:
         questions = [];
     }

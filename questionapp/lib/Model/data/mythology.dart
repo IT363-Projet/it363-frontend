@@ -1,4 +1,4 @@
-import '../../models/question.dart';
+import '../models/question.dart';
 
 final List<Question> mythologyThemeQuestions = 
 [
