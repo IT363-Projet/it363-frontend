@@ -12,7 +12,8 @@ final List<Question> LHthemeQuestions =
       'Uranus': 0,
       'Saturne': 0,
     },
-    correctAnswer: ['Jupiter', 'Saturne', 'Uranus', 'Neptune'],
+    correctAnswer: ['Jupiter: 1', 'Neptune: 4', 'Uranus: 3', 'Saturne: 2'],
+    
   ),
   Question(
     id: 'q2',

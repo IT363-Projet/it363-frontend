@@ -12,7 +12,8 @@ class QuestionViewModel {
   int correctAnswers = 0;
   int incorrectAnswers = 0;
 
-  final ValueNotifier<int> totalTime = ValueNotifier<int>(0); // Chronomètre réactif
+  final ValueNotifier<int> totalTime =
+      ValueNotifier<int>(0); // Chronomètre réactif
   Timer? _timer;
 
   QuestionViewModel(String theme) {
@@ -55,6 +56,11 @@ class QuestionViewModel {
   bool submitAnswer(dynamic selectedOption) {
     final currentQuestion = questions[currentQuestionIndex];
 
+    print(selectedOption.toString());
+    print(currentQuestion.correctAnswer.toString());
+    print(selectedOption);
+    print(currentQuestion.correctAnswer);
+
     if (selectedOption.toString() == currentQuestion.correctAnswer.toString()) {
       correctAnswers++;
       return true;
@@ -75,4 +81,3 @@ class QuestionViewModel {
     }
   }
 }
-
