@@ -56,11 +56,6 @@ class QuestionViewModel {
   bool submitAnswer(dynamic selectedOption) {
     final currentQuestion = questions[currentQuestionIndex];
 
-    print(selectedOption.toString());
-    print(currentQuestion.correctAnswer.toString());
-    print(selectedOption);
-    print(currentQuestion.correctAnswer);
-
     if (selectedOption.toString() == currentQuestion.correctAnswer.toString()) {
       correctAnswers++;
       return true;
