@@ -11,7 +11,11 @@ COLOR_FILE_MEDIA = Fore.YELLOW
 COLOR_FILE_FONT = Fore.CYAN
 COLOR_RESET = Style.RESET_ALL
 
-def print_tree(directory, prefix=""):
+def print_tree(directory, prefix="", depth=0, max_depth=2):
+    # Arrêter si la profondeur maximale est atteinte
+    if depth > max_depth:
+        return
+
     try:
         # Liste les éléments du répertoire
         items = sorted(os.listdir(directory))
@@ -41,9 +45,10 @@ def print_tree(directory, prefix=""):
         # Si c'est un répertoire, appeler récursivement
         if os.path.isdir(path):
             extension = "    " if is_last else "│   "
-            print_tree(path, prefix + extension)
+            print_tree(path, prefix + extension, depth + 1, max_depth)
 
 # Point d'entrée du script
 if __name__ == "__main__":
     print("Arborescence du projet :")
-    print_tree(".")
+    print_tree(".", max_depth=2)
+

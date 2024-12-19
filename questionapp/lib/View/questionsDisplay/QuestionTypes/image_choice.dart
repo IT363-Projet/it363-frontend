@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Model/models/question.dart';
+import '../../../Model/models/Question.dart';
 
 class ImageChoiceWidget extends StatefulWidget {
   final Question question;
@@ -35,7 +35,7 @@ class _ImageChoiceWidgetState extends State<ImageChoiceWidget> {
             itemBuilder: (context, index) {
               final imagePath = widget.question.imageOptions![index];
               final isSelected = selectedImage == imagePath;
-
+              print(selectedImage);
               return GestureDetector(
                 onTap: () {
                   setState(() {
@@ -65,6 +65,7 @@ class _ImageChoiceWidgetState extends State<ImageChoiceWidget> {
         ),
         SizedBox(height: 20),
         ElevatedButton(
+          
           onPressed: selectedImage != null
               ? () => widget.onSubmit(selectedImage!)
               : null,

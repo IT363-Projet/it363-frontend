@@ -1,4 +1,4 @@
-import '../models/question.dart';
+import '../../models/Question.dart';
 
 final List<Question> geographyThemeQuestions = 
 [
@@ -20,10 +20,10 @@ final List<Question> geographyThemeQuestions =
     questionText: 'Cliquez sur le Mont Everest',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/K2.jpg',
-      'lib/assets/everest.jpg',
-      'lib/assets/aconcagua.jpg',
-      'lib/assets/mont_blanc.jpg',
+      'lib/assets/images/K2.jpg',
+      'lib/assets/images/everest.jpg',
+      'lib/assets/images/aconcagua.jpg',
+      'lib/assets/images/mont_blanc.jpg',
     ],
     correctAnswer: 'lib/assets/everest.jpg',
   ),
@@ -38,14 +38,14 @@ final List<Question> geographyThemeQuestions =
   Question(
     id: 'q4',
     questionText: 'Quel pays a la plus grande population ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Chine', 'Inde', 'États-Unis', 'Indonésie'],
     correctAnswer: 'Chine',
   ),
   Question(
     id: 'q5',
     questionText: 'Cochez les fleuves qui traversent l\'Europe :',
-    questionType: 'lookup_table',
+    questionType: 'multiple_choice',
     columns: ["Fleuve", "Continent"],
     tableData: [
       {"Option": "Danube", "Criteria": "Europe"},
@@ -69,7 +69,7 @@ final List<Question> geographyThemeQuestions =
   Question(
     id: 'q7',
     questionText: 'Quel océan est le plus grand ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Atlantique', 'Pacifique', 'Indien', 'Arctique'],
     correctAnswer: 'Pacifique',
   ),
@@ -78,12 +78,12 @@ final List<Question> geographyThemeQuestions =
     questionText: 'Cliquez sur l\'Australie',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/afrique.jpg',
-      'lib/assets/europe.jpg',
-      'lib/assets/australie.jpg',
-      'lib/assets/asie.jpg',
+      'lib/assets/images/afrique.jpg',
+      'lib/assets/images/europe.jpg',
+      'lib/assets/images/australie.jpg',
+      'lib/assets/images/asie.jpg',
     ],
-    correctAnswer: 'lib/assets/australie.jpg',
+    correctAnswer: 'lib/assets/images/australie.jpg',
   ),
   Question(
     id: 'q9',

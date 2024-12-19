@@ -1,10 +1,10 @@
-import '../models/question.dart';
+import '../../models/Question.dart';
 
 final List<Question> sciFiThemeQuestions = [
   Question(
     id: 'q1',
     questionText: 'Qui a réalisé "Blade Runner" ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: [
       'Ridley Scott',
       'Steven Spielberg',
@@ -18,12 +18,12 @@ final List<Question> sciFiThemeQuestions = [
     questionText: 'Cliquez sur le vaisseau TARDIS :',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/millennium_falcon.jpg',
-      'lib/assets/enterprise.jpg',
-      'lib/assets/tardis.jpg',
-      'lib/assets/xwing.jpg',
+      'lib/assets/images/millennium_falcon.jpg',
+      'lib/assets/images/enterprise.jpg',
+      'lib/assets/images/tardis.jpg',
+      'lib/assets/images/xwing.jpg',
     ],
-    correctAnswer: 'lib/assets/tardis.jpg',
+    correctAnswer: 'lib/assets/images/tardis.jpg',
   ),
   Question(
     id: 'q3',
@@ -53,7 +53,7 @@ final List<Question> sciFiThemeQuestions = [
   Question(
     id: 'q5',
     questionText: 'Cochez les films mettant en scène des robots :',
-    questionType: 'lookup_table',
+    questionType: 'multiple_choice',
     columns: ["Film", "Présence de robots"],
     tableData: [
       {"Option": "I, Robot", "Criteria": "Oui"},
@@ -77,7 +77,7 @@ final List<Question> sciFiThemeQuestions = [
   Question(
     id: 'q7',
     questionText: "Quelle est la planète d'origine de Luke Skywalker dans Star Wars ?",
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: [
       'Tatooine',
       'Hoth',

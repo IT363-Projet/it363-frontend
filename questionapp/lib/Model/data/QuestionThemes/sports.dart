@@ -1,10 +1,10 @@
-import '../models/question.dart';
+import '../../models/Question.dart';
 
 final List<Question> sportsThemeQuestions = [
   Question(
     id: 'q1',
     questionText: 'Qui a remporté la Coupe du Monde de football en 2018 ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: [
       'Brésil',
       'Allemagne',
@@ -18,12 +18,12 @@ final List<Question> sportsThemeQuestions = [
     questionText: 'Cliquez sur le ballon utilisé dans la finale de la Coupe du Monde 2018 :',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/ballon_2010.jpg',
-      'lib/assets/ballon_2014.jpg',
-      'lib/assets/ballon_2018.jpg',
-      'lib/assets/ballon_2022.jpg',
+      'lib/assets/images/ballon_2010.jpg',
+      'lib/assets/images/ballon_2014.jpg',
+      'lib/assets/images/ballon_2018.jpg',
+      'lib/assets/images/ballon_2022.jpg',
     ],
-    correctAnswer: 'lib/assets/ballon_2018.jpg',
+    correctAnswer: 'lib/assets/images/ballon_2018.jpg',
   ),
   Question(
     id: 'q3',
@@ -53,7 +53,7 @@ final List<Question> sportsThemeQuestions = [
   Question(
     id: 'q5',
     questionText: 'Cochez les sports qui sont des disciplines olympiques :',
-    questionType: 'lookup_table',
+    questionType: 'multiple_choice',
     columns: ["Sport", "Discipline Olympique"],
     tableData: [
       {"Option": "Basketball", "Criteria": "Oui"},
@@ -77,7 +77,7 @@ final List<Question> sportsThemeQuestions = [
   Question(
     id: 'q7',
     questionText: 'Quelle équipe a remporté le plus de titres NBA ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: [
       'Los Angeles Lakers',
       'Chicago Bulls',
@@ -89,7 +89,7 @@ final List<Question> sportsThemeQuestions = [
   Question(
     id: 'q8',
     questionText: "Qui est le meilleur joueur de football de l'Histoire ?",
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     imageOptions: [
       'Maradona',
       'Pelé',

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:questionapp/Model/models/AppTheme.dart';
+import 'package:questionapp/Model/models/AppMode.dart';
 import 'package:questionapp/View/screens/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'ViewModel/FirebaseOptions.dart';

@@ -1,4 +1,4 @@
-import '../models/question.dart';
+import '../../models/Question.dart';
 
 final List<Question> mythologyThemeQuestions = 
 [
@@ -13,14 +13,14 @@ final List<Question> mythologyThemeQuestions =
   Question(
     id: 'q2',
     questionText: 'Quel dieu est connu comme le messager des dieux ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Hermès', 'Apollon', 'Arès', 'Dionysos'],
     correctAnswer: 'Hermès',
   ),
   Question(
     id: 'q3',
     questionText: 'Associez les dieux à leurs domaines respectifs :',
-    questionType: 'lookup_table',
+    questionType: 'multiple_choice',
     columns: ["Dieu", "Domaine"],
     tableData: [
       {"Option": "Poséidon", "Criteria": "Mer"},
@@ -44,7 +44,7 @@ final List<Question> mythologyThemeQuestions =
   Question(
     id: 'q5',
     questionText: 'Quel héros grec a tué le Minotaure ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Thésée', 'Héraclès', 'Achille', 'Persée'],
     correctAnswer: 'Thésée',
   ),
@@ -59,14 +59,14 @@ final List<Question> mythologyThemeQuestions =
   Question(
     id: 'q7',
     questionText: 'Quelle déesse est associée à la sagesse et à la stratégie militaire ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Athéna', 'Artémis', 'Héra', 'Aphrodite'],
     correctAnswer: 'Athéna',
   ),
   Question(
     id: 'q8',
     questionText: 'Quel dieu grec est associé au soleil ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Apollon', 'Hélios', 'Zeus', 'Hermès'],
     correctAnswer: 'Apollon',
   ),
@@ -75,17 +75,17 @@ final List<Question> mythologyThemeQuestions =
     questionText: 'Cliquez sur une image représentant une harpie',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/assets/harpy.jpg',
-      'lib/assets/cerberus.jpg',
-      'lib/assets/minotaur.jpg',
-      'lib/assets/siren.jpg',
+      'lib/assets/images/harpy.jpg',
+      'lib/assets/images/cerberus.jpg',
+      'lib/assets/images/minotaur.jpg',
+      'lib/assets/images/siren.jpg',
     ],
-    correctAnswer: 'lib/assets/harpy.jpg',
+    correctAnswer: 'lib/assets/images/harpy.jpg',
   ),
   Question(
     id: 'q10',
     questionText: 'Quel dieu grec est associé au vin et à la fête ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Dionysos', 'Apollon', 'Arès', 'Hermès'],
     correctAnswer: 'Dionysos',
   ),

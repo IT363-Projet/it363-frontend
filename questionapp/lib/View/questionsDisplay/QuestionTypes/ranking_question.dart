@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../Model/models/question.dart';
+import '../../../Model/models/Question.dart';
 
 class RankingQuestionWidget extends StatefulWidget {
   final Question question;
-  final Function(List<String>) onSubmit; // Format attendu : ['Jupiter: 1', ...]
+  final Function(List<String>) onSubmit; 
 
   RankingQuestionWidget({required this.question, required this.onSubmit});
-
   @override
+
   _RankingQuestionWidgetState createState() => _RankingQuestionWidgetState();
 }
 
@@ -17,13 +17,11 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
   @override
   void initState() {
     super.initState();
-    // Initialiser les classements avec des valeurs uniques
     int initialRank = 1;
     rankings = {
       for (var option in widget.question.rankingOptions!.keys) option: initialRank++
     };
   }
-
   void _updateRankings(String option, int newValue) {
     setState(() {
       // Trouver quelle option possède déjà cette valeur
@@ -31,13 +29,10 @@ class _RankingQuestionWidgetState extends State<RankingQuestionWidget> {
         (key) => rankings[key] == newValue && key != option,
         orElse: () => "",
       );
-
       // Si une option est en conflit, on la décale
       if (conflictingOption != null) {
-        rankings[conflictingOption] = rankings[option]!; // Swap les valeurs
+        rankings[conflictingOption] = rankings[option]!;
       }
-
-      // Met à jour le classement pour l'option courante
       rankings[option] = newValue;
     });
   }

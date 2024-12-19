@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../widgets/QuestionWidget.dart';
-import '../widgets/ScoreBoardWidget.dart';
+import '../questionsDisplay/QuestionDisplay.dart';
+import '../questionsDisplay/ScoreBoardDisplay.dart';
 import '../../View/screens/LoginRegisterPage.dart';
 import '../../ViewModel/QuestionViewModel.dart';
 

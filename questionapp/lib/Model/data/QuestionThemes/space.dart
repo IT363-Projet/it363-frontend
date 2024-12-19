@@ -1,4 +1,4 @@
-import '../models/question.dart';
+import '../../models/Question.dart';
 
 final List<Question> spaceThemeQuestions = 
 [
@@ -20,12 +20,12 @@ final List<Question> spaceThemeQuestions =
     questionText: 'Cliquez sur Neptune',
     questionType: 'image_choice',
     imageOptions: [
-      'lib/Model/assets/jupiter.jpg',
-      'lib/Model/assets/mercure.jpg',
-      'lib/Model/assets/uranus.jpg',
-      'lib/Model/assets/neptune.jpg',
+      'lib/Model/assets/images/jupiter.jpg',
+      'lib/Model/assets/images/mercure.jpg',
+      'lib/Model/assets/images/uranus.jpg',
+      'lib/Model/assets/images/neptune.jpg',
     ],
-    correctAnswer: 'lib/assets/neptune.jpg',
+    correctAnswer: 'lib/Model/assets/images/neptune.jpg',
   ),
   Question(
     id: 'q3',
@@ -38,14 +38,14 @@ final List<Question> spaceThemeQuestions =
   Question(
     id: 'q4',
     questionText: 'Quelle planète est surnomée la "planète rouge" ?',
-    questionType: 'multiple_choice',
+    questionType: 'single_choice',
     options: ['Mars', 'Vénus', 'Mercure', 'Neptune'],
     correctAnswer: 'Mars',
   ),
   Question(
     id: 'q5',
     questionText: 'Cochez les planètes gazeuses:',
-    questionType: 'lookup_table',
+    questionType: 'multiple_choice',
     columns: ["Planète", "Gazeuse"],
     tableData: [
       {"Option": "Saturne", "Criteria": "gazeuse"},
@@ -53,6 +53,7 @@ final List<Question> spaceThemeQuestions =
       {"Option": "Mercure", "Criteria": "solide"},
       {"Option": "Uranus", "Criteria": "gazeuse"},
     ],
+    correctAnswer: ['Saturne','Uranus'],
   ),
     Question(
     id: 'q6',
@@ -67,5 +68,3 @@ final List<Question> spaceThemeQuestions =
     correctAnswer: 'Mercure', 
   ),  
 ];
-
-

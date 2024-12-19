@@ -1,13 +1,13 @@
 // chemin lib/widgets/QuestionWidget.dart
 
 import 'package:flutter/material.dart';
-import 'package:questionapp/View/widgets/widgetTypes/slider_question_widget%20copy.dart';
-import '../../Model/models/question.dart';
-import 'widgetTypes/multiple_choice_widget.dart';
-import 'widgetTypes/drop_down_question_widget.dart';
-import 'widgetTypes/ranking_question_widget.dart';
-import 'widgetTypes/lookup_table_widget.dart';
-import 'widgetTypes/image_choice_widget.dart';
+import 'package:questionapp/View/questionsDisplay/QuestionTypes/slider_question_widget.dart';
+import '../../Model/models/Question.dart';
+import 'QuestionTypes/single_choice.dart';
+import 'QuestionTypes/drop_down_question.dart';
+import 'QuestionTypes/ranking_question.dart';
+import 'QuestionTypes/multiple_choice.dart';
+import 'QuestionTypes/image_choice.dart';
 
 class QuestionWidget<T> extends StatelessWidget {
   final Question question;
@@ -18,8 +18,8 @@ class QuestionWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (question.questionType) {
-      case 'multiple_choice':
-        return MultipleChoiceWidget(
+      case 'single_choice':
+        return SingleChoiceWidget(
             question: question,
             onSubmit: (selectedOption) => onSubmit(selectedOption as T));
       case 'slider':
@@ -28,9 +28,10 @@ class QuestionWidget<T> extends StatelessWidget {
             onSubmit: (sliderValue) => onSubmit(sliderValue as T));
       case 'ranking':
         return RankingQuestionWidget(
-            question: question, onSubmit: (ranking) => onSubmit(ranking as T));
-      case 'lookup_table':
-        return LookupTableWidget(
+            question: question, 
+            onSubmit: (ranking) => onSubmit(ranking as T));
+      case 'multiple_choice':
+        return MultipleChoiceWidget(
           question: question,
           onSubmit: (selectedOptions) => onSubmit(selectedOptions as T),
         );
