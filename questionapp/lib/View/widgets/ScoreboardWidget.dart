@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScoreBoardWidget extends StatelessWidget {
-  final ValueNotifier<int> totalTimeNotifier; // Notifier pour le temps
+  final ValueNotifier<int> totalTimeNotifier;
   final int correctAnswers;
   final int incorrectAnswers;
   final String title;
@@ -16,17 +16,19 @@ class ScoreBoardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return ValueListenableBuilder<int>(
       valueListenable: totalTimeNotifier,
       builder: (context, totalTime, child) {
         return Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: theme.cardColor,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: theme.shadowColor.withOpacity(0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -37,12 +39,17 @@ class ScoreBoardWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: theme.textTheme.titleLarge,
               ),
               const SizedBox(height: 8),
-              _buildScoreTile('Correct', correctAnswers, Colors.green),
-              _buildScoreTile('Incorrect', incorrectAnswers, Colors.red),
-              _buildScoreTile('Time', totalTime, Colors.blue),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildScoreTile('Correct', correctAnswers, theme.colorScheme.primary),
+                  _buildScoreTile('Time', totalTime, theme.colorScheme.secondary),
+                  _buildScoreTile('Incorrect', incorrectAnswers, theme.colorScheme.error),
+                ],
+              ),
             ],
           ),
         );
@@ -58,10 +65,10 @@ class ScoreBoardWidget extends StatelessWidget {
           label,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Text(
           label == 'Time' ? _formatTime(value) : value.toString(),
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color),
         ),
       ],
     );

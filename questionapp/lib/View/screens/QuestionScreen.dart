@@ -5,8 +5,9 @@ import '../../ViewModel/QuestionViewModel.dart';
 
 class QuestionScreen extends StatefulWidget {
   final String theme;
+  final VoidCallback toggleTheme;
 
-  const QuestionScreen({required this.theme});
+  const QuestionScreen({required this.theme, required this.toggleTheme});
 
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
@@ -52,6 +53,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     if (_viewModel.questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text('Thème : ${widget.theme}')),
@@ -63,6 +65,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
       appBar: AppBar(
         title: Text('Thème : ${widget.theme}'),
         centerTitle: true,
+        backgroundColor: theme.primaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(theme.brightness == Brightness.dark
+                ? Icons.brightness_7
+                : Icons.brightness_2),
+            onPressed: widget.toggleTheme,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -85,4 +96,3 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 }
-
