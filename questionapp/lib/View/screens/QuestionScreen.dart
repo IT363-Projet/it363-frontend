@@ -34,11 +34,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   void _showCompletionDialog() {
+    final correctAnswers = _viewModel.correctAnswers;
+    final incorrectAnswers = _viewModel.incorrectAnswers;
+    final time = _viewModel.totalTime.value;
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Merci !"),
+          title: const Text("Thanks !"),
+          content: Text(
+              "Correct Answers: $correctAnswers\nIncorrect Answers: $incorrectAnswers\nTotal Time: $time seconds"),
           actions: [
             TextButton(
               onPressed: () {
@@ -58,7 +64,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => LoginRegisterPage(toggleTheme: widget.toggleTheme),
+        builder: (context) =>
+            LoginRegisterPage(toggleTheme: widget.toggleTheme),
       ),
     );
   }
@@ -83,7 +90,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
           ],
         ),
-        body: const Center(child: Text('No questions available for this theme.')),
+        body:
+            const Center(child: Text('No questions available for this theme.')),
       );
     }
 
