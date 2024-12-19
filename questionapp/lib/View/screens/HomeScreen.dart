@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'QuestionScreen.dart';
+import 'LoginRegisterPage.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback toggleTheme; // Fonction pour basculer le thème
@@ -11,6 +13,16 @@ class HomeScreen extends StatelessWidget {
   };
 
   HomeScreen({required this.toggleTheme});
+
+  Future<void> _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginRegisterPage(toggleTheme: toggleTheme),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +43,10 @@ class HomeScreen extends StatelessWidget {
                 ? Icons.brightness_7
                 : Icons.brightness_2),
             onPressed: toggleTheme,
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _logout(context),
           ),
         ],
       ),

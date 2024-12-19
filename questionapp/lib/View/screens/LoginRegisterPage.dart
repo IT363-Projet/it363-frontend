@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../Model/models/AppTheme.dart'; 
 
 class LoginRegisterPage extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -15,6 +14,10 @@ class LoginRegisterPage extends StatefulWidget {
 class LoginRegisterPageState extends State<LoginRegisterPage> {
   bool isLogin = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   void toggleForm() {
     setState(() {
@@ -31,7 +34,6 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Logged in successfully!')),
       );
-      // Redirection vers HomeScreen avec le thème dynamique
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -54,7 +56,6 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Account created successfully!')),
       );
-      // Redirection vers HomeScreen avec le thème dynamique
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -70,51 +71,52 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login / Register'),
-        backgroundColor: AppTheme('light').themeData.primaryColor, // Utilisation du thème
+        backgroundColor: theme.colorScheme.primary,
         actions: [
           IconButton(
-            icon: const Icon(Icons.brightness_6),
-            onPressed: widget.toggleTheme, // Basculer entre clair et sombre
+            icon: Icon(theme.brightness == Brightness.dark
+                ? Icons.brightness_7
+                : Icons.brightness_2),
+            onPressed: widget.toggleTheme,
           ),
         ],
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF9AC8EB),
+        decoration: BoxDecoration(
+          color: theme.scaffoldBackgroundColor,
         ),
         child: Center(
           child: Container(
             width: 800,
             height: 400,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.125),
+              color: theme.cardColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 25,
-                  offset: const Offset(0, 5),
+                  color: theme.shadowColor.withOpacity(0.2),
+                  blurRadius: 20,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
             child: Stack(
               children: [
-                // Formulaire Sign In
                 AnimatedOpacity(
                   opacity: isLogin ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
-                  child: _buildLoginForm(),
+                  child: _buildLoginForm(theme),
                 ),
-                // Formulaire Sign Up
                 AnimatedOpacity(
                   opacity: isLogin ? 0.0 : 1.0,
                   duration: const Duration(milliseconds: 500),
-                  child: _buildRegisterForm(),
+                  child: _buildRegisterForm(theme),
                 ),
-                // Boutons pour basculer entre les formulaires
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: TextButton(
@@ -123,9 +125,8 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
                       isLogin
                           ? "Don't have an account? Register"
                           : "Already have an account? Login",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -136,45 +137,44 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
         ),
       ),
     );
-  }TextEditingController emailController = TextEditingController();TextEditingController passwordController = TextEditingController();
+  }
 
-  Widget _buildLoginForm() {
+  Widget _buildLoginForm(ThemeData theme) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Sign In",
-            style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style: theme.textTheme.titleLarge,
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: emailController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Email',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: theme.colorScheme.surface,
             ),
           ),
           const SizedBox(height: 15),
           TextFormField(
             controller: passwordController,
             obscureText: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Password',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: theme.colorScheme.surface,
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF9AC8EB),
-              foregroundColor: const Color(0xFFEBF4F3),
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
             ),
             onPressed: () {
               _login(emailController.text, passwordController.text);
@@ -186,72 +186,61 @@ class LoginRegisterPageState extends State<LoginRegisterPage> {
     );
   }
 
-  Widget _buildRegisterForm() {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
-
+  Widget _buildRegisterForm(ThemeData theme) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Sign Up",
-            style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style: theme.textTheme.titleLarge,
           ),
           const SizedBox(height: 20),
-          // Champ Email
           TextFormField(
             controller: emailController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Email',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: theme.colorScheme.surface,
             ),
           ),
           const SizedBox(height: 15),
-          // Champ Mot de Passe
           TextFormField(
             controller: passwordController,
             obscureText: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Password',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: theme.colorScheme.surface,
             ),
           ),
           const SizedBox(height: 15),
-          // Champ Confirmation du Mot de Passe
           TextFormField(
             controller: confirmPasswordController,
             obscureText: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Confirm Password',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: theme.colorScheme.surface,
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF9AC8EB),
-              foregroundColor: const Color(0xFFEBF4F3),
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
             ),
             onPressed: () {
-              // Vérification si les mots de passe correspondent
               if (passwordController.text != confirmPasswordController.text) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Passwords do not match!')),
                 );
                 return;
               }
-
-              // Appel à la fonction _register
               _register(emailController.text, passwordController.text);
             },
             child: const Text("Register"),

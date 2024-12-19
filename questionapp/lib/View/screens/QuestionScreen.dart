@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/QuestionWidget.dart';
 import '../widgets/ScoreBoardWidget.dart';
+import '../../View/screens/LoginRegisterPage.dart';
 import '../../ViewModel/QuestionViewModel.dart';
 
 class QuestionScreen extends StatefulWidget {
@@ -51,12 +53,36 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 
+  Future<void> _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginRegisterPage(toggleTheme: widget.toggleTheme),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (_viewModel.questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text('Thème : ${widget.theme}')),
+        appBar: AppBar(
+          title: Text('Thème : ${widget.theme}'),
+          actions: [
+            IconButton(
+              icon: Icon(theme.brightness == Brightness.dark
+                  ? Icons.brightness_7
+                  : Icons.brightness_2),
+              onPressed: widget.toggleTheme,
+            ),
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () => _logout(context),
+            ),
+          ],
+        ),
         body: const Center(child: Text('No questions available for this theme.')),
       );
     }
@@ -72,6 +98,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 ? Icons.brightness_7
                 : Icons.brightness_2),
             onPressed: widget.toggleTheme,
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _logout(context),
           ),
         ],
       ),
